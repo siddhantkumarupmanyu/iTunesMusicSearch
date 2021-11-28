@@ -13,7 +13,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
-            android:background="@android:color/white">
+            android:background="@drawable/round_corners_8dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/top_app_bar"
@@ -22,9 +22,9 @@
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                <!--<EditText-->
+                <!--    android:layout_width="match_parent"-->
+                <!--    android:layout_height="match_parent" />-->
 
             </com.google.android.material.appbar.MaterialToolbar>
 
