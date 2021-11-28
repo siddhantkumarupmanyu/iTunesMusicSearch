@@ -7,6 +7,10 @@ lets get a walking skeleton before writing End To End Test
 
 API: https://itunes.apple.com/search?term=#term&media=music&entity=song
 
+I really want to fix the shadow in AppbarLayout...
+    - but is getting late
+    - will do it in last
+
 should I use ListAdapter??
     - In my opinion data will be new on each search, so it does not make sense to diff.
     - we can just go with regular recycler view adapter.

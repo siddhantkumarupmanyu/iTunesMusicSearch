@@ -22,9 +22,19 @@
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp">
 
-                <!--<EditText-->
-                <!--    android:layout_width="match_parent"-->
-                <!--    android:layout_height="match_parent" />-->
+                <EditText
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints=""
+                    android:background="@null"
+                    android:hint="@string/search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textNoSuggestions"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="8dp"
+                    android:singleLine="true"
+                    android:textAppearance="?attr/textAppearanceSubtitle1" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 
