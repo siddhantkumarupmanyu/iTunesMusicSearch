@@ -28,6 +28,7 @@
                     android:layout_height="match_parent"
                     android:autofillHints=""
                     android:background="@null"
+                    android:drawablePadding="4dp"
                     android:hint="@string/search"
                     android:imeOptions="actionSearch"
                     android:inputType="textNoSuggestions"
