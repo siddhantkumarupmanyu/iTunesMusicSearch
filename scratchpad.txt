@@ -1,7 +1,5 @@
 
 
-add hilt and write fragment tests
-
 should I write integration test for
    - keyboard is hidden when search is clicked on keyboard
     - I want to but in 'cost vs benefit', cost seems too much for this
