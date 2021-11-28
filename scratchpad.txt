@@ -1,6 +1,16 @@
 
 
 
+
+API: https://itunes.apple.com/search?term=#term&media=music&entity=song
+
+should I use ListAdapter??
+    - In my opinion data will be new on each search, so it does not make sense to diff.
+    - we can just go with regular recycler view adapter.
+
+
+================= Challenge Doubts =================
+
 - Should I search for artists or songs. On top challenge, it says Songs but below it says, 'search for an artist'?
     - going only for songs right now.
 - Do I have to use the same API, or can I include the other query parameters in search as itunes api says
