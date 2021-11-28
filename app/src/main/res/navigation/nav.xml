@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="sku.challenge.itunesmusicsearch.GalleryFragment"
+        android:name="sku.challenge.itunesmusicsearch.ui.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
 

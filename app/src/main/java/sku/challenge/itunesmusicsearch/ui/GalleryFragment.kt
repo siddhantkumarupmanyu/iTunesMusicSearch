@@ -1,4 +1,4 @@
-package sku.challenge.itunesmusicsearch
+package sku.challenge.itunesmusicsearch.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import sku.challenge.itunesmusicsearch.R
 import sku.challenge.itunesmusicsearch.databinding.FragmentGalleryBinding
 
 
