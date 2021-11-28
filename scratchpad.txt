@@ -1,0 +1,10 @@
+
+
+
+- Should I search for artists or songs. On top challenge, it says Songs but below it says, 'search for an artist'?
+    - going only for songs right now.
+- Do I have to use the same API, or can I include the other query parameters in search as itunes api says
+    so we are sure that results returned are of same type rather than mixed typed. Which it returns by default?
+    - adding API parameters so we get only one type of results
+- Third is can include material components. Since Android Studio's new Project already includes them?
+    - just going to use material components
