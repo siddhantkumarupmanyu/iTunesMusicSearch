@@ -11,10 +11,12 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import sku.challenge.itunesmusicsearch.R
 import sku.challenge.itunesmusicsearch.databinding.FragmentGalleryBinding
 
 
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
 
