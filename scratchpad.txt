@@ -1,6 +1,13 @@
 
 
-we will add hilt when we will add the ViewModel
+add hilt and write fragment tests
+
+should I write integration test for
+   - keyboard is hidden when search is clicked on keyboard
+   - drawable is hidden when focus is changed and there is not text
+   - drawable clears the text on click
+    - in my opinion let's test only this behaviour, other are more lean towards how it looks
+        rather than any functionality. But this one is a behaviour we want.
 
 lets get a walking skeleton before writing End To End Test
 
