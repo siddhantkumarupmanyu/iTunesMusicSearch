@@ -22,7 +22,8 @@ abstract class TracksDao {
     protected abstract suspend fun insertTrackSearchRoomEntity(vararg trackSearchRoomEntity: TrackSearchRoomEntity)
 
 
-    suspend fun insertTrackerSearch(trackSearch: TrackSearch) {
+    @Transaction
+    open suspend fun insertTrackerSearch(trackSearch: TrackSearch) {
         val trackSearchRoomEntity = TrackSearchRoomEntity(
             trackSearch.query,
             TrackSearchRoomEntity.getResultStringFromResultList(trackSearch.results),
