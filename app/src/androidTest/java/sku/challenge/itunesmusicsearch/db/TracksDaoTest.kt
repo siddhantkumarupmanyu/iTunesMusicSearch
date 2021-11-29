@@ -4,9 +4,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
+import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import sku.challenge.itunesmusicsearch.vo.Track
@@ -54,13 +54,12 @@ class TracksDaoTest : DbTest() {
         assertThat(retrievedResult, `is`(trackSearch))
     }
 
-    @Ignore
     @Test
-    fun noTrackSearchFound() {
+    fun noTrackSearchFound() = runTest {
         // room return null if no dataIsFound
 
-        // val retrievedResult = tracksDao.queryTrackSearch("overdrive")
-        //
-        // assertThat(retrievedResult, `is`(nullValue()))
+        val retrievedResult = tracksDao.queryTrackSearch("overdrive")
+
+        assertThat(retrievedResult, `is`(nullValue()))
     }
 }
