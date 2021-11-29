@@ -58,7 +58,7 @@ class GalleryFragmentTest {
 
     @Ignore
     @Test
-    fun progressBar_WhenLoading() {
+    fun showProgressBar_WhenLoading() {
 
     }
 
