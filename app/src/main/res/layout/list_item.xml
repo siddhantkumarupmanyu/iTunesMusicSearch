@@ -29,9 +29,10 @@
                 android:layout_height="174dp"
                 android:contentDescription="@string/track_thumbnail"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_thumbnail"
+                app:imageFromUrl="@{track.thumbnailUrl}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/no_thumbnail" />
 
 
             <TextView
