@@ -4,7 +4,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.Test
@@ -13,8 +12,8 @@ import sku.challenge.itunesmusicsearch.vo.Track
 import sku.challenge.itunesmusicsearch.vo.TrackSearch
 
 
-// tests should neve extend, every test should be decoupled from other
-// ignoring this one
+// tests should never extend, every test should be decoupled from other
+// ignoring this one for now
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 class TracksDaoTest : DbTest() {
@@ -56,10 +55,10 @@ class TracksDaoTest : DbTest() {
 
     @Test
     fun noTrackSearchFound() = runTest {
-        // room return null if no dataIsFound
+        // room returns null if no dataIsFound
 
         val retrievedResult = tracksDao.queryTrackSearch("overdrive")
 
-        assertThat(retrievedResult, `is`(nullValue()))
+        assertThat(retrievedResult, `is`(TrackSearch.EMPTY_TRACKER_SEARCH))
     }
 }

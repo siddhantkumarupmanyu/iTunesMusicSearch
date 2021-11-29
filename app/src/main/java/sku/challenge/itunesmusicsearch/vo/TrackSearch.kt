@@ -5,4 +5,8 @@ data class TrackSearch(
     val results: List<Track>
 ) {
     lateinit var query: String
+
+    companion object {
+        val EMPTY_TRACKER_SEARCH = TrackSearch(0, emptyList())
+    }
 }

@@ -35,12 +35,14 @@ abstract class TracksDao {
     }
 
     @Query("SELECT * FROM tracksearchroomentity WHERE `query` = :query")
-    abstract suspend fun getTrackSearchRoomEntity(query: String): TrackSearchRoomEntity
+    abstract suspend fun getTrackSearchRoomEntity(query: String): TrackSearchRoomEntity?
 
     // not going to care about order for now
     @Transaction
     open suspend fun queryTrackSearch(query: String): TrackSearch {
-        val trackerSearchRoomEntity = getTrackSearchRoomEntity(query)
+        val trackerSearchRoomEntity =
+            getTrackSearchRoomEntity(query) ?: return TrackSearch.EMPTY_TRACKER_SEARCH
+
         val longList = trackerSearchRoomEntity.resultsLongList()
 
         val tracks = getTracks(longList)
