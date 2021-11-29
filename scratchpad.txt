@@ -1,5 +1,20 @@
 
 
+
+thing is, why should i be returning flow from room
+    - see Behavioral/Dynamic diagram below ( I am missing a great word for these type of diagrams :(
+    - we need that if we are taking room as source of truth,
+        since, new data will be first added to room and then it automatically updates the data using flow.
+    - if we go with room as single it would beb easy to add paging library,
+        and it will decrease memory footprint
+        - but i don't thing we are using that much of a memory
+    - Single Source of truth provides muc more features like auto fetching when internet comes.
+    - But sticking to using room as Backup for now. YAGNI (now)
+    - Implementing Room as Backup rather than Single Source Of truth.
+        - Won't be supporting LIKE Query
+        - We will only return TrackSearch result if exist.
+
+
 should I write integration test for
    - keyboard is hidden when search is clicked on keyboard
     - I want to but in 'cost vs benefit', cost seems too much for this
@@ -28,3 +43,43 @@ API: https://itunes.apple.com/search?term=#term&media=music&entity=song
     - adding API parameters so we get only one type of results
 - Third is can include material components. Since Android Studio's new Project already includes them?
     - just going to use material components
+
+================= Notes ===================
+
+1) Room as single source of truth
+                    ViewModel       Repository           Room         Api
+                       |                |                  |           |
+                       |    search      |                  |           |
+                       |--------------> |     Query        |           |
+                       |                |----------------> |           |
+                       |                |<------flow------ |           |
+                       |<------flow-----|                  |           |
+            Update Ui  |                |           Query Api          |
+         <-------------|                |----------------------------->|
+                       |                |<-----------Result------------|
+                       |                |  Insert          |           |
+                       |                |----------------->|           |
+                       |                |                  |           |
+                       |<---------- Emit new data ---------|           |
+            Update Ui  |                |                  |           |
+         <-------------|                |                  |           |
+                       |                |                  |           |
+                       |                |                  |           |
+
+
+        2) Room as a backup
+                     ViewModel       Repository           Room         Api
+                        |                |                  |           |
+                        |    search      |                  |           |
+                        |--------------> |                  |           |
+              Loading Ui|<---flow--------|           Query Api          |
+          <-------------|                |----------------------------->|
+                        |                |<-----------Result------------|
+                        |                |  Insert          |           |
+                        |                |----------------->|           |
+                        |                |                  |           |
+             Update Ui  |<-emit new data-|                  |           |
+          <-------------|                |                  |           |
+                        |                |                  |           |
+                        |                |                  |           |
+                        |                |                  |           |
