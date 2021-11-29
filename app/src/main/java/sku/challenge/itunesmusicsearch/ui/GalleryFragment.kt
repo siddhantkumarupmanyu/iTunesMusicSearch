@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import sku.challenge.itunesmusicsearch.R
 import sku.challenge.itunesmusicsearch.databinding.FragmentGalleryBinding
+import sku.challenge.itunesmusicsearch.vo.Track
 
 
 @AndroidEntryPoint
@@ -45,6 +46,7 @@ class GalleryFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
+        // todo clean this code
         binding.searchView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 binding.searchView.setCompoundDrawablesWithIntrinsicBounds(
@@ -89,6 +91,18 @@ class GalleryFragment : Fragment() {
                 false
             }
         }
+    }
+
+    private fun fakeData(): List<Track> {
+        return listOf(
+            Track(1, "overdrive", "krsna", ""),
+            Track(2, "overdrive", "krsna2", ""),
+            Track(3, "overdrive", "krsna3", ""),
+            Track(4, "overdrive", "krsna4", ""),
+            Track(5, "overdrive", "krsna5", ""),
+            Track(6, "overdrive", "krsna6", ""),
+            Track(7, "overdrive", "krsna7", ""),
+        )
     }
 
     override fun onDestroyView() {

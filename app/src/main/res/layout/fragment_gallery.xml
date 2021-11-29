@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -22,15 +23,17 @@
                 app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp">
 
+                <!-- weird bug -->
+                <!-- https://stackoverflow.com/questions/67419323/how-can-i-solve-android-studio-4-2-rendering-problem-->
                 <EditText
                     android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autofillHints=""
                     android:background="@null"
                     android:drawablePadding="4dp"
                     android:hint="@string/search"
                     android:imeOptions="actionSearch"
+                    android:importantForAutofill="no"
                     android:inputType="textNoSuggestions"
                     android:paddingStart="12dp"
                     android:paddingEnd="8dp"
@@ -40,6 +43,17 @@
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:spanCount="2"
+            tools:listitem="@layout/list_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
