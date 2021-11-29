@@ -106,6 +106,13 @@ class GalleryFragment : Fragment() {
             Track(5, "overdrive", "krsna5", ""),
             Track(6, "overdrive", "krsna6", ""),
             Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
+            Track(7, "overdrive", "krsna7", ""),
         )
     }
 

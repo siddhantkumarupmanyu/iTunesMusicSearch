@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentInsetEnd="0dp"
-                app:contentInsetStart="0dp">
+                app:contentInsetStart="0dp"
+                app:layout_scrollFlags="scroll|enterAlways|snap">
 
                 <!-- weird bug -->
                 <!-- https://stackoverflow.com/questions/67419323/how-can-i-solve-android-studio-4-2-rendering-problem-->
@@ -44,16 +45,23 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/grid_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:spanCount="2"
-            tools:listitem="@layout/list_item" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/grid_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/list_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

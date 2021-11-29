@@ -35,6 +35,8 @@ import java.util.*
  * fragment and any child views.
  */
 
+
+// https://github.com/android/android-test/issues/317
 class DataBindingIdlingResource : IdlingResource {
     // list of registered callbacks
     private val idlingCallbacks = mutableListOf<IdlingResource.ResourceCallback>()
