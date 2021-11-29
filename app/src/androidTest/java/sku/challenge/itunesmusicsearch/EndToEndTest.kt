@@ -54,7 +54,7 @@ class EndToEndTest {
     }
 
     @Test
-    fun searchSongs() {
+    fun searchSong() {
         enqueueResponse()
 
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
