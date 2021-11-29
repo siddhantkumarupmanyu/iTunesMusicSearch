@@ -47,7 +47,7 @@ class TracksDaoTest : DbTest() {
             query = "overdrive"
         }
 
-        tracksDao.insertTrackerSearch(trackSearch)
+        tracksDao.insertTrackSearch(trackSearch)
 
         val retrievedResult = tracksDao.queryTrackSearch("overdrive")
         assertThat(retrievedResult, `is`(trackSearch))

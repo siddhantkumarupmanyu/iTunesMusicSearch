@@ -23,7 +23,7 @@ abstract class TracksDao {
 
 
     @Transaction
-    open suspend fun insertTrackerSearch(trackSearch: TrackSearch) {
+    open suspend fun insertTrackSearch(trackSearch: TrackSearch) {
         val trackSearchRoomEntity = TrackSearchRoomEntity(
             trackSearch.query,
             TrackSearchRoomEntity.getResultStringFromResultList(trackSearch.results),
