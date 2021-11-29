@@ -8,9 +8,6 @@ should I write integration test for
 
 lets get a walking skeleton before writing End To End Test
 
-
-API: https://itunes.apple.com/search?term=#term&media=music&entity=song
-
 I really want to fix the shadow in AppbarLayout...
     - but is getting late
     - will do it in last
@@ -20,10 +17,12 @@ should I use ListAdapter??
     - we can just go with regular recycler view adapter.
 
 
+API: https://itunes.apple.com/search?term=#term&media=music&entity=song
+    - this counts artist name as search term too, see ApiServiceTest
+
+
 ================= Challenge Doubts =================
 
-- Should I search for artists or songs. On top challenge, it says Songs but below it says, 'search for an artist'?
-    - going only for songs right now.
 - Do I have to use the same API, or can I include the other query parameters in search as itunes api says
     so we are sure that results returned are of same type rather than mixed typed. Which it returns by default?
     - adding API parameters so we get only one type of results
