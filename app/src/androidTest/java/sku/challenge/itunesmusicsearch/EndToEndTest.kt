@@ -67,8 +67,8 @@ class EndToEndTest {
 
         assertRequestsAreMade()
 
-        onView(gridMatcher().atPosition(1)).check(matches(hasDescendant(withText("Katy Rose"))))
-        onView(gridMatcher().atPosition(3)).check(matches(hasDescendant(withText("Jaytech"))))
+        onView(listMatcher().atPosition(1)).check(matches(hasDescendant(withText("Katy Rose"))))
+        onView(listMatcher().atPosition(3)).check(matches(hasDescendant(withText("Jaytech"))))
 
         activityScenario.close()
     }
@@ -91,7 +91,7 @@ class EndToEndTest {
         IdlingRegistry.getInstance().register(resource)
     }
 
-    private fun gridMatcher(): RecyclerViewMatcher {
+    private fun listMatcher(): RecyclerViewMatcher {
         return RecyclerViewMatcher(R.id.grid_view)
     }
 
