@@ -17,6 +17,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,6 +54,12 @@ class GalleryFragmentTest {
 
         onView(withId(R.id.search_view)).perform(clickPercent(0.9f, 0.5f))
         onView(withId(R.id.search_view)).check(matches(withText("")))
+    }
+
+    @Ignore
+    @Test
+    fun progressBar_WhenLoading() {
+
     }
 
     // https://stackoverflow.com/a/58841245
