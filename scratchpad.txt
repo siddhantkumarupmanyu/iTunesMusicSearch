@@ -1,5 +1,13 @@
 
 
+Should repository return flow or should it just return search result
+    - in case of flow, repository is responsible for telling about Loading state
+    - in case of direct result, viewModel is responsible for telling about Loading state
+    - does it in case of returning result directly, does it violate CQS(Command Query Separation)
+    - at the same time question arises where do I want to handle Exception thrown by retrofit
+        - IMO, it depends on above choice I think. IDK.
+        - Gonna skip them for now
+    - for now just going with returning result. (KISS)
 
 thing is, why should i be returning flow from room
     - see Behavioral/Dynamic diagram below ( I am missing a great word for these type of diagrams :(
