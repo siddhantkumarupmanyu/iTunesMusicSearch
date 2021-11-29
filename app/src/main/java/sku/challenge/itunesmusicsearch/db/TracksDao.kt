@@ -15,8 +15,11 @@ abstract class TracksDao {
     @Query("SELECT * FROM track WHERE trackId = :trackId")
     abstract suspend fun getTrack(trackId: Long): Track
 
+    @Query("SELECT * FROM track WHERE trackId IN(:tracksIds)")
+    abstract suspend fun getTracks(tracksIds: List<Long>): List<Track>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract suspend fun insertTrackSearchRoomEntity(vararg trackSearch: TrackSearchRoomEntity)
+    protected abstract suspend fun insertTrackSearchRoomEntity(vararg trackSearchRoomEntity: TrackSearchRoomEntity)
 
 
     suspend fun insertTrackerSearch(trackSearch: TrackSearch) {
@@ -26,14 +29,23 @@ abstract class TracksDao {
             trackSearch.resultCount
         )
 
+        insertTracks(*trackSearch.results.toTypedArray())
+
         return insertTrackSearchRoomEntity(trackSearchRoomEntity)
     }
 
+    @Query("SELECT * FROM tracksearchroomentity WHERE `query` = :query")
+    abstract suspend fun getTrackSearchRoomEntity(query: String): TrackSearchRoomEntity
 
-    // @Transaction
-    // suspend fun queryTrackSearch(query: String): TrackSearch {
-    //     TODO()
-    // }
+    // not going to care about order for now
+    @Transaction
+    open suspend fun queryTrackSearch(query: String): TrackSearch {
+        val trackerSearchRoomEntity = getTrackSearchRoomEntity(query)
+        val longList = trackerSearchRoomEntity.resultsLongList()
+
+        val tracks = getTracks(longList)
+        return TrackSearch(trackerSearchRoomEntity.count, tracks)
+    }
 
     @Entity
     data class TrackSearchRoomEntity(
@@ -53,6 +65,12 @@ abstract class TracksDao {
                 return string.toString()
             }
 
+        }
+
+        fun resultsLongList(): List<Long> {
+            return results.split(",").toList().map {
+                it.trim().toLong()
+            }
         }
 
     }

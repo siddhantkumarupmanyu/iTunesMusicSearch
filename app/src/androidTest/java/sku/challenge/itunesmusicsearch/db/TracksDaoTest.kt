@@ -2,6 +2,7 @@ package sku.challenge.itunesmusicsearch.db
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -37,7 +38,7 @@ class TracksDaoTest : DbTest() {
     }
 
     @Test
-    fun insertTrackSearch() = runTest {
+    fun insertTrackSearch() = runBlocking {
         val tracks = listOf(
             Track(1, "overdrive", "krsna", "https://example.com/thumbnail_over_krsna.jpg"),
             Track(4, "overdrive", "prozpekt", "https://example.com/thumbnail_over_proz.jpg")
@@ -49,9 +50,8 @@ class TracksDaoTest : DbTest() {
 
         tracksDao.insertTrackerSearch(trackSearch)
 
-        // val retrievedResult = tracksDao.queryTrackSearch("overdrive")
-        //
-        // assertThat(retrievedResult, `is`(trackSearch))
+        val retrievedResult = tracksDao.queryTrackSearch("overdrive")
+        assertThat(retrievedResult, `is`(trackSearch))
     }
 
     @Ignore
