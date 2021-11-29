@@ -46,6 +46,10 @@ class GalleryFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.gridView.adapter = GalleryAdapter()
+
+        (binding.gridView.adapter as GalleryAdapter).tracks = fakeData()
+
         // todo clean this code
         binding.searchView.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
