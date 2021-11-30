@@ -11,12 +11,11 @@ import kotlinx.coroutines.test.setMain
 import kotlinx.coroutines.yield
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
-import org.hamcrest.core.IsEqual.equalTo
 import org.hamcrest.core.IsInstanceOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import sku.challenge.itunesmusicsearch.repository.SearchRepository
+import sku.challenge.itunesmusicsearch.fake.FakeRepository
 import sku.challenge.itunesmusicsearch.vo.Track
 
 @ExperimentalCoroutinesApi
@@ -84,23 +83,5 @@ class GalleryViewModelTest {
         )
     }
 
-
-    // just because mockito does not allow suspend function while stubbing
-    // can use mockito-koltin but, just another dependency for only this simple case
-    class FakeRepository : SearchRepository {
-
-        var query: String = ""
-        var delayBeforeReturningResult: Long = 0
-        var tracks: List<Track> = emptyList()
-
-        override suspend fun query(query: String): List<Track> {
-            assertThat(query, `is`(equalTo(this.query)))
-
-            delay(delayBeforeReturningResult)
-
-            return tracks
-        }
-
-    }
 
 }

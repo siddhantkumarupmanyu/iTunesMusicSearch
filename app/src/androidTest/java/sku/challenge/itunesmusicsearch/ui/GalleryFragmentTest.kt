@@ -12,18 +12,26 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.runTest
+import org.hamcrest.core.IsNot.not
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import sku.challenge.itunesmusicsearch.R
+import sku.challenge.itunesmusicsearch.fake.FakeRepository
 import sku.challenge.itunesmusicsearch.test_utils.DataBindingIdlingResourceRule
 import sku.challenge.itunesmusicsearch.test_utils.launchFragmentInHiltContainer
+import sku.challenge.itunesmusicsearch.vo.Track
 
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class GalleryFragmentTest {
@@ -34,6 +42,15 @@ class GalleryFragmentTest {
     @JvmField
     @Rule
     val dataBindingIdlingResourceRule = DataBindingIdlingResourceRule()
+
+
+    private val tracks = listOf(
+        Track(1, "overdrive", "krsna", "https://example.com/thumbnail_over_krsna.jpg"),
+        Track(4, "overdrive", "prozpekt", "https://example.com/thumbnail_over_proz.jpg")
+    )
+
+    @BindValue
+    val repository = FakeRepository()
 
     @Before
     fun setUp() {
@@ -55,14 +72,24 @@ class GalleryFragmentTest {
     }
 
     @Test
-    fun showProgressBar_WhenLoading() {
+    fun showProgressBar_WhenLoading() = runTest {
+        repository.query = "overdrive"
+        repository.delayBeforeReturningResult = 10L
+        repository.tracks = tracks
+
+        onView(withId(R.id.progress_indicator)).check(matches(not(isDisplayed())))
+
         onView(withId(R.id.search_view)).perform(
             click(),
-            typeText("song name"),
+            typeText("overdrive"),
             pressImeActionButton()
         )
 
         onView(withId(R.id.progress_indicator)).check(matches(isDisplayed()))
+
+        delay(20L)
+
+        onView(withId(R.id.progress_indicator)).check(matches(not(isDisplayed())))
     }
 
     @Ignore

@@ -1,6 +1,14 @@
 
 
-
+android has ConnectivityManager#getActiveNetwork() for checking if we are connected to a network.
+    - but is this enough??
+    - stackoverflow users say, it might be we are connected to a network but no internet is available
+    - One possible way is to just let retrofit fetch. If it fails, with any exception, which it
+        will if there is no internet we can just use that? Should we go this way??
+    - You know what I am thinking,
+        - I experimented and found that, HEAD request to https://itunes.apple.com/search
+            return 200 as response code
+        - we can use this as a PING.
 
 https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-test/README.md
 

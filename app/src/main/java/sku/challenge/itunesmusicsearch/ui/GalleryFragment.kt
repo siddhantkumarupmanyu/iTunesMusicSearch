@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import sku.challenge.itunesmusicsearch.R
 import sku.challenge.itunesmusicsearch.databinding.FragmentGalleryBinding
@@ -25,6 +26,8 @@ class GalleryFragment : Fragment() {
 
     private val binding: FragmentGalleryBinding
         get() = _binding!!
+
+    private val viewModel: GalleryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +51,19 @@ class GalleryFragment : Fragment() {
 
         binding.gridView.adapter = GalleryAdapter()
 
-        (binding.gridView.adapter as GalleryAdapter).tracks = fakeData()
+        // (binding.gridView.adapter as GalleryAdapter).tracks = fakeData()
+
+        // todo: uncomment
+        // lifecycleScope.launch {
+        //     repeatOnLifecycle(Lifecycle.State.STARTED) {
+        //         viewModel.tracks.collect { result ->
+        //             when (result) {
+        //                 is GalleryViewModel.TracksResult.Loading -> showProgressIndicator()
+        //                 is GalleryViewModel.TracksResult.Success -> updateTracks(result)
+        //             }
+        //         }
+        //     }
+        // }
 
         // todo clean this code
         binding.searchView.setOnFocusChangeListener { v, hasFocus ->
@@ -95,6 +110,19 @@ class GalleryFragment : Fragment() {
                 false
             }
         }
+    }
+
+    private fun updateTracks(result: GalleryViewModel.TracksResult.Success) {
+        hideProgressIndicator()
+        (binding.gridView.adapter as GalleryAdapter).tracks = result.tracks
+    }
+
+    private fun hideProgressIndicator() {
+        binding.progressIndicator.visibility = View.GONE
+    }
+
+    private fun showProgressIndicator() {
+        binding.progressIndicator.visibility = View.VISIBLE
     }
 
     private fun fakeData(): List<Track> {

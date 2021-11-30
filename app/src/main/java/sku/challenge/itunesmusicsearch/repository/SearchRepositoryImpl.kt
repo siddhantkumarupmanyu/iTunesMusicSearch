@@ -3,9 +3,10 @@ package sku.challenge.itunesmusicsearch.repository
 import sku.challenge.itunesmusicsearch.api.ApiService
 import sku.challenge.itunesmusicsearch.db.TracksDao
 import sku.challenge.itunesmusicsearch.vo.Track
+import javax.inject.Inject
 
 // lack of better name
-class SearchRepositoryImpl(
+class SearchRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val dao: TracksDao,
     private val isInternetAvailable: () -> Boolean

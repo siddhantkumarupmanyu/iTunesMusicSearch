@@ -82,9 +82,11 @@
                         android:layout_marginBottom="2dp"
                         android:elevation="8dp"
                         android:indeterminate="true"
+                        android:visibility="gone"
                         app:indicatorColor="@color/very_light_blue"
                         app:trackColor="@color/platinum"
-                        app:trackCornerRadius="4dp" />
+                        app:trackCornerRadius="4dp"
+                        tools:visibility="visible" />
 
                 </FrameLayout>
 
