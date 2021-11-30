@@ -123,7 +123,7 @@ class GalleryFragment : Fragment() {
     private fun updateTracks(result: GalleryViewModel.TracksResult.Success) {
         hideProgressIndicator()
         if (result.tracks.isEmpty()) {
-            binding.gridView.visibility = View.GONE
+            binding.gridView.visibility = View.INVISIBLE
             binding.emptyListPlaceholder.visibility = View.VISIBLE
         } else {
             binding.gridView.visibility = View.VISIBLE

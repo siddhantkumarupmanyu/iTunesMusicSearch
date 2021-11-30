@@ -8,6 +8,8 @@
 
         <item name="colorAccent">#3871c5</item>
 
+        <item name="colorSurface">@color/white</item>
+
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/white</item>
