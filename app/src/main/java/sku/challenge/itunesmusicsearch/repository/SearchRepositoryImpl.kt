@@ -14,6 +14,8 @@ class SearchRepositoryImpl constructor(
     override suspend fun query(query: String): List<Track> {
         return if (isInternetAvailable()) {
             val trackSearch = apiService.searchTracks(query)
+            trackSearch.query = query
+
             dao.insertTrackSearch(trackSearch)
 
             trackSearch.results

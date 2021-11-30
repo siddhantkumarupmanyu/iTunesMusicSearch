@@ -39,7 +39,10 @@ class SearchRepositoryImplTest {
         assertThat(result, `is`(tracks))
 
         verify(apiService).searchTracks("overdrive")
-        verify(tracksDao).insertTrackSearch(trackSearch)
+
+        verify(tracksDao).insertTrackSearch(trackSearch.copy().apply {
+            query = "overdrive"
+        })
 
         verify(tracksDao, never()).queryTrackSearch(anyString())
     }
