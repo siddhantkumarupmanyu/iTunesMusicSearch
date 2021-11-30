@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 
-class Network(
+class InternetChecker(
     baseUrl: String,
     private val client: OkHttpClient
 ) {

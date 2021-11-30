@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class NetworkTest {
+class InternetCheckerTest {
 
 
     private val mockWebServer = MockWebServer()
@@ -26,7 +26,7 @@ class NetworkTest {
         mockWebServer.start(8080)
 
         val okHttpClient = OkHttpClient()
-        val network = Network(mockWebServer.url("/").toString(), okHttpClient)
+        val network = InternetChecker(mockWebServer.url("/").toString(), okHttpClient)
 
         val mockResponse = MockResponse()
             .setResponseCode(200)
@@ -47,7 +47,7 @@ class NetworkTest {
         mockWebServer.start(8080)
 
         val okHttpClient = OkHttpClient()
-        val network = Network(mockWebServer.url("/").toString(), okHttpClient)
+        val network = InternetChecker(mockWebServer.url("/").toString(), okHttpClient)
 
         mockWebServer.shutdown()
 
