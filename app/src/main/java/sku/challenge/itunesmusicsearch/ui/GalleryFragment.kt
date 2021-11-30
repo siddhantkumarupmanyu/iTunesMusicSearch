@@ -12,7 +12,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import sku.challenge.itunesmusicsearch.R
 import sku.challenge.itunesmusicsearch.databinding.FragmentGalleryBinding
 import sku.challenge.itunesmusicsearch.vo.Track
@@ -53,17 +58,17 @@ class GalleryFragment : Fragment() {
 
         // (binding.gridView.adapter as GalleryAdapter).tracks = fakeData()
 
-        // todo: uncomment
-        // lifecycleScope.launch {
-        //     repeatOnLifecycle(Lifecycle.State.STARTED) {
-        //         viewModel.tracks.collect { result ->
-        //             when (result) {
-        //                 is GalleryViewModel.TracksResult.Loading -> showProgressIndicator()
-        //                 is GalleryViewModel.TracksResult.Success -> updateTracks(result)
-        //             }
-        //         }
-        //     }
-        // }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.tracks.collect { result ->
+                    when (result) {
+                        is GalleryViewModel.TracksResult.Loading -> showProgressIndicator()
+                        is GalleryViewModel.TracksResult.Success -> updateTracks(result)
+                    }
+
+                }
+            }
+        }
 
         // todo clean this code
         binding.searchView.setOnFocusChangeListener { v, hasFocus ->
@@ -105,6 +110,9 @@ class GalleryFragment : Fragment() {
                     requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
 
                 imm?.hideSoftInputFromWindow(view.windowToken, 0)
+
+                viewModel.search(binding.searchView.text.toString())
+
                 true
             } else {
                 false
@@ -114,6 +122,13 @@ class GalleryFragment : Fragment() {
 
     private fun updateTracks(result: GalleryViewModel.TracksResult.Success) {
         hideProgressIndicator()
+        if (result.tracks.isEmpty()) {
+            binding.gridView.visibility = View.GONE
+            binding.emptyListPlaceholder.visibility = View.VISIBLE
+        } else {
+            binding.gridView.visibility = View.VISIBLE
+            binding.emptyListPlaceholder.visibility = View.GONE
+        }
         (binding.gridView.adapter as GalleryAdapter).tracks = result.tracks
     }
 

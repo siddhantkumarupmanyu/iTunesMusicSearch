@@ -8,7 +8,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import okhttp3.OkHttpClient
@@ -24,6 +23,7 @@ import sku.challenge.itunesmusicsearch.test_utils.OkHttp3IdlingResource
 import sku.challenge.itunesmusicsearch.test_utils.RecyclerViewMatcher
 import sku.challenge.itunesmusicsearch.test_utils.enqueueResponse
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -36,8 +36,8 @@ class EndToEndTest {
 
     private val mockWebServer = MockWebServer()
 
-    @BindValue
-    val okHttpClient = OkHttpClient()
+    @Inject
+    lateinit var okHttpClient: OkHttpClient
 
     @Before
     fun startServer() {

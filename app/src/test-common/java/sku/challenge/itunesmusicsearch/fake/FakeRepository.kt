@@ -1,7 +1,7 @@
 package sku.challenge.itunesmusicsearch.fake
 
 import kotlinx.coroutines.delay
-import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is
 import org.hamcrest.core.IsEqual
 import sku.challenge.itunesmusicsearch.repository.SearchRepository
@@ -16,7 +16,7 @@ class FakeRepository : SearchRepository {
     var tracks: List<Track> = emptyList()
 
     override suspend fun query(query: String): List<Track> {
-        MatcherAssert.assertThat(query, Is.`is`(IsEqual.equalTo(this.query)))
+        assertThat(query, Is.`is`(IsEqual.equalTo(this.query)))
 
         delay(delayBeforeReturningResult)
 

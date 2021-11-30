@@ -18,10 +18,9 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.core.IsNot.not
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -76,10 +75,10 @@ class GalleryFragmentTest {
     }
 
     @Test
-    fun showProgressBar_WhenLoading() = runTest {
+    fun showProgressBar_WhenLoading(): Unit = runBlocking {
         repository as FakeRepository
         repository.query = "overdrive"
-        repository.delayBeforeReturningResult = 10L
+        repository.delayBeforeReturningResult = 200
         repository.tracks = tracks
 
         onView(withId(R.id.progress_indicator)).check(matches(not(isDisplayed())))
@@ -90,17 +89,31 @@ class GalleryFragmentTest {
             pressImeActionButton()
         )
 
+        delay(10)
+
         onView(withId(R.id.progress_indicator)).check(matches(isDisplayed()))
 
-        delay(20L)
+        delay(200)
 
         onView(withId(R.id.progress_indicator)).check(matches(not(isDisplayed())))
     }
 
-    @Ignore
     @Test
-    fun showEmptyImageView_WhenTracksAreEmpty() {
+    fun showEmptyImageView_WhenTracksAreEmpty(): Unit = runBlocking {
+        repository as FakeRepository
+        repository.query = "overdrive"
+        repository.delayBeforeReturningResult = 20
+        repository.tracks = emptyList()
 
+        onView(withId(R.id.search_view)).perform(
+            click(),
+            typeText("overdrive"),
+            pressImeActionButton()
+        )
+
+        delay(100)
+
+        onView(withId(R.id.empty_list_placeholder)).check(matches(isDisplayed()))
     }
 
     // https://stackoverflow.com/a/58841245
