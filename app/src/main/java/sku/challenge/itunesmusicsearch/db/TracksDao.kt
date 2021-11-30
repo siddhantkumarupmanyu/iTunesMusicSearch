@@ -47,7 +47,9 @@ abstract class TracksDao {
         val longList = trackerSearchRoomEntity.resultsLongList()
 
         val tracks = getTracks(longList)
-        return TrackSearch(trackerSearchRoomEntity.count, tracks)
+        return TrackSearch(trackerSearchRoomEntity.count, tracks).also {
+            it.query = query
+        }
     }
 
     @Entity

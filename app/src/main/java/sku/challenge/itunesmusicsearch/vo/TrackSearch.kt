@@ -7,7 +7,9 @@ data class TrackSearch(
     lateinit var query: String
 
     companion object {
-        val EMPTY_TRACKER_SEARCH = TrackSearch(0, emptyList())
+        val EMPTY_TRACKER_SEARCH = TrackSearch(0, emptyList()).apply {
+            query = ""
+        }
     }
 
 
