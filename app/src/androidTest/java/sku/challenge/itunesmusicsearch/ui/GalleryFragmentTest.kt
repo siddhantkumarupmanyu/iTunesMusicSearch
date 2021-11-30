@@ -15,6 +15,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
@@ -25,7 +26,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import sku.challenge.itunesmusicsearch.R
+import sku.challenge.itunesmusicsearch.di.AppModule
 import sku.challenge.itunesmusicsearch.fake.FakeRepository
+import sku.challenge.itunesmusicsearch.repository.SearchRepository
 import sku.challenge.itunesmusicsearch.test_utils.DataBindingIdlingResourceRule
 import sku.challenge.itunesmusicsearch.test_utils.launchFragmentInHiltContainer
 import sku.challenge.itunesmusicsearch.vo.Track
@@ -33,6 +36,7 @@ import sku.challenge.itunesmusicsearch.vo.Track
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
+@UninstallModules(AppModule::class)
 @HiltAndroidTest
 class GalleryFragmentTest {
 
@@ -50,7 +54,7 @@ class GalleryFragmentTest {
     )
 
     @BindValue
-    val repository = FakeRepository()
+    val repository: SearchRepository = FakeRepository()
 
     @Before
     fun setUp() {
@@ -73,6 +77,7 @@ class GalleryFragmentTest {
 
     @Test
     fun showProgressBar_WhenLoading() = runTest {
+        repository as FakeRepository
         repository.query = "overdrive"
         repository.delayBeforeReturningResult = 10L
         repository.tracks = tracks

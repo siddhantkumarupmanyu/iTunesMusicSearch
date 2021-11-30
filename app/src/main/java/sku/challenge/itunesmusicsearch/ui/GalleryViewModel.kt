@@ -12,23 +12,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    // private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository
 ) : ViewModel() {
 
-    // todo uncomment
+    private val _tracks = MutableStateFlow<TracksResult>(TracksResult.Success(emptyList()))
 
+    val tracks: StateFlow<TracksResult> = _tracks
 
-    // private val _tracks = MutableStateFlow<TracksResult>(TracksResult.Success(emptyList()))
-    //
-    // val tracks: StateFlow<TracksResult> = _tracks
-    //
-    // fun search(query: String) {
-    //     viewModelScope.launch {
-    //         _tracks.value = TracksResult.Loading
-    //         val results = searchRepository.query(query)
-    //         _tracks.emit(TracksResult.Success(results))
-    //     }
-    // }
+    fun search(query: String) {
+        viewModelScope.launch {
+            _tracks.value = TracksResult.Loading
+            val results = searchRepository.query(query)
+            _tracks.emit(TracksResult.Success(results))
+        }
+    }
 
     sealed class TracksResult {
         class Success(val tracks: List<Track>) : TracksResult()
