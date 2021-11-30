@@ -8,8 +8,8 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
@@ -42,11 +42,18 @@ class NetworkTest {
         mockWebServer.shutdown()
     }
 
-    @Ignore
     @Test
-    fun internetIsUnavailable() {
+    fun internetIsUnavailable() = runTest {
+        mockWebServer.start(8080)
 
-        // assertFalse(network.isInternetConnectionAvailable())
+        val okHttpClient = OkHttpClient()
+        val network = Network(mockWebServer.url("/").toString(), okHttpClient)
+
+        mockWebServer.shutdown()
+
+        val internetStatus = network.isInternetConnectionAvailable()
+
+        assertFalse(internetStatus)
     }
 
 }

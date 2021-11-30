@@ -4,9 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.io.IOException
 
 class Network(
-    private val baseUrl: String,
+    baseUrl: String,
     private val client: OkHttpClient
 ) {
 
@@ -19,12 +20,20 @@ class Network(
             .build()
 
         val call = client.newCall(request)
-        val response = call.execute()
 
-        // can use fail fast here
-        // for now assert will work
-        assert(response.code() == 200)
-        return@withContext true
+        try {
+            val response = call.execute()
+
+            // can use fail fast here
+            // for now assert will work
+            assert(response.code() == 200)
+            response.close()
+
+            return@withContext true
+        } catch (e: IOException) { // assuming every IO exception is Network Exception
+            return@withContext false
+        }
+
     }
 
 }
