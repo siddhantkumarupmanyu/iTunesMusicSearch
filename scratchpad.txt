@@ -33,12 +33,6 @@ should I write integration test for
    - drawable is hidden when focus is changed and there is no text
     - same for this
 
-lets get a walking skeleton before writing End To End Test
-
-I really want to fix the shadow in AppbarLayout...
-    - but is getting late
-    - will do it in last
-
 should I use ListAdapter??
     - In my opinion data will be new on each search, so it does not make sense to diff.
     - we can just go with regular recycler view adapter.
