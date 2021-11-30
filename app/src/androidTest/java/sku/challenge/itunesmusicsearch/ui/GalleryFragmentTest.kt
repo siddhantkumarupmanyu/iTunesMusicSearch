@@ -8,11 +8,9 @@ import androidx.test.espresso.action.CoordinatesProvider
 import androidx.test.espresso.action.GeneralClickAction
 import androidx.test.espresso.action.Press
 import androidx.test.espresso.action.Tap
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -56,9 +54,20 @@ class GalleryFragmentTest {
         onView(withId(R.id.search_view)).check(matches(withText("")))
     }
 
-    @Ignore
     @Test
     fun showProgressBar_WhenLoading() {
+        onView(withId(R.id.search_view)).perform(
+            click(),
+            typeText("song name"),
+            pressImeActionButton()
+        )
+
+        onView(withId(R.id.progress_indicator)).check(matches(isDisplayed()))
+    }
+
+    @Ignore
+    @Test
+    fun showEmptyImageView_WhenTracksAreEmpty() {
 
     }
 

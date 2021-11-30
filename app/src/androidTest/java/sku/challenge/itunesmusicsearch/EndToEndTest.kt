@@ -70,6 +70,13 @@ class EndToEndTest {
         onView(listMatcher().atPosition(1)).check(matches(hasDescendant(withText("Katy Rose"))))
         onView(listMatcher().atPosition(3)).check(matches(hasDescendant(withText("Jaytech"))))
 
+        // remove internet
+        // search for some other song
+        // assert no items
+
+        // search overdrive again
+        // assert again
+
         activityScenario.close()
     }
 
