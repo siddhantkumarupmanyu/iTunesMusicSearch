@@ -1,7 +1,8 @@
 # iTunesMusicSearch
-A simple app that uses iTunes API to search for Music Tracks
+A simple app that uses iTunes API to search for Music Tracks.
 
 ## About Architecture and Code
+- Uses Flow and it's variant everywhere, no dependency on Livedata, making tests easy to read and understand
 - MVVM
 - Test Driven Development (TDD)
 - SOLID Principles
@@ -25,6 +26,7 @@ A simple app that uses iTunes API to search for Music Tracks
   - Retrofit and gson
   - Glide
 * Tests
+  - uses `runTest` from `kotlinx-coroutines-test:1.6.0-RC`
   - Junit
   - Mockito
   - Mockwebserver by okhttp3
