@@ -1,6 +1,8 @@
 # iTunesMusicSearch
 A simple app that uses iTunes API to search for Music Tracks.
 
+https://user-images.githubusercontent.com/66074842/145562735-2de5ecc6-ad0c-436a-ab8c-5d903ad44296.mp4
+
 ## About Architecture and Code
 - Uses Flow and it's variant everywhere, no dependency on Livedata, making tests easy to read and understand
 - MVVM
